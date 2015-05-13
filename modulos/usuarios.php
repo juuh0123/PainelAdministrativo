@@ -1,13 +1,24 @@
 <?php
- require_once(dirname(dirname(__FILE__))."/funcoes.php");
- protegeArquivo(basename(__FILE__));
-
+require_once(dirname(dirname(__FILE__))."/funcoes.php");
+protegeArquivo(basename(__FILE__));
+loadJS('jquery-validate');
+loadJS('jquery-validate-messages');
  //$teste = dirname(__FILE__);
  //echo $teste;
  
 	switch($tela):
 		case 'login':
 			?>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$(".userForm").validate({
+						rules:{
+							usuario:{required:true, minlength:3},
+							senha:{required:true, rangelength:[4,10]},
+						}
+					});
+				});
+			</script>
 			<div id="loginForm">
 				<form class="userForm" method="post" action="">
 					<fieldset>
@@ -23,6 +34,20 @@
 							</li>
 							<li class="center"><input class="radius5" type="submit" name="logar" value="Login"/></li>
 						</ul>
+						<?php
+							@$erro = $_GET['erro'];
+							switch($erro):
+								case 1:
+									echo '<div class="sucesso">Você fez logoff do sistema.</div>';
+									break;
+								case 2:
+									echo '<div class="erro">Dados incorretos ou usuário inativo.</div>';
+									break;
+								case 3:
+									echo '<div class="erro">Faça login antes de acessar a página solicitada.</div>';	
+									break;
+							endswitch;
+						?>
 					</fieldset>
 				</form>
 			</div>	
