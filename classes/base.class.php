@@ -1,6 +1,6 @@
 <?php
-	require_once("banco.class.php");
-	
+	require_once(dirname(__FILE__).'/autoload.php'); //não chamo o funcoes.php, chamo o autoload->funcoes
+	protegeArquivo(basename(__FILE__));//tenho que chamar em todas minhas classes
 	abstract class Base extends  banco{
 		//propriedades ou atributos
 		public $tabela = "";

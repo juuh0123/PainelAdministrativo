@@ -5,9 +5,18 @@ loadJS('jquery-validate');
 loadJS('jquery-validate-messages');
  //$teste = dirname(__FILE__);
  //echo $teste;
- 
 	switch($tela):
 		case 'login':
+			if(isset($_POST['logar']))://logar é do form
+				$user = new usuarios();
+				$user->setValor('login', $_POST['usuario']);//campo do form
+				$user->setValor('senha', $_POST['senha']);
+				if($user->doLogin($user)):
+					redireciona('painel.php');
+				else:
+					redireciona('?erro=2');	
+				endif;	
+			endif;	
 			?>
 			<script type="text/javascript">
 				$(document).ready(function(){

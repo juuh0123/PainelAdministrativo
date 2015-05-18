@@ -1,11 +1,12 @@
 <?php
-
-	abstract class banco{
+require_once(dirname(__FILE__).'/autoload.php'); //não chamo o funcoes.php, chamo o autoload->funcoes
+protegeArquivo(basename(__FILE__));//tenho que chamar em todas minhas classes
+abstract class banco{
 		//propriedades
-		public $servidor = "localhost";
-		public $usuario =  "root";
-		public $senha = "";
-		public $nomebanco = "crud";
+		public $servidor = DBHOST;
+		public $usuario =  DBUSER;
+		public $senha = DBPASS;
+		public $nomebanco = DBNAME;
 		public $conexao = null;		
 		public $dataset =null;
 		public $linhasafetadas = -1;
@@ -84,7 +85,7 @@
 			echo $sql;
 			return $this->executaSQL($sql);
 		}//excluir
-		public function select($objeto){
+		public function select($objeto){//esse é meu selecionaTudo
 			$sql = "SELECT * FROM ".$objeto->tabela;
 			if($objeto->extrasSelect != null):
 				$sql .= " ".$objeto->extrasSelect;

@@ -12,7 +12,13 @@
 				die(utf8_decode('Uma configuração do sistema está ausente: '.$valor));			
 			endif;
 		endforeach;			
-		require_once(BASEPATH.CLASSESPATH.'autoload.php');	
+		require_once(BASEPATH.CLASSESPATH.'autoload.php');
+		if(@$_GET['logoff']==TRUE):
+			//faz logoff
+			$user = new usuarios();
+			$user->doLogout();
+			exit;
+		endif;		
 	}
 	
 	function loadCSS($arquivo = null, $media ='screen', $import = FALSE){
@@ -51,7 +57,9 @@
 	function redireciona($url = ''){
 		header("Location: ".BASEURL.$url);
 	}//redireciona
-	
+	function codificaSenha($senha){
+		return md5($senha);
+	}//codificaSenha
 ?>
 
 
