@@ -60,6 +60,14 @@
 	function codificaSenha($senha){
 		return md5($senha);
 	}//codificaSenha
+	
+	function verificaLogin(){
+		$sessao = new sessao();
+		if($sessao->getNvars() <= 0 || $sessao->getVar('logado')!= TRUE || $sessao->getVar('ip') != $_SERVER['REMOTE_ADDR']):
+			redireciona('?erro=3');
+		endif;	
+	}//vai verificar session, se pode ou não acessar certas páginas
+	
 ?>
 
 
