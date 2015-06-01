@@ -19,15 +19,15 @@ class sessao{
 	}//metodo start
 	
 	private function setNvars(){
-		$this->nvars = sizeof($_SESSION);
+		$this->nvars = sizeof($_SESSION); //vai pegar todas váriaveis da sessao
 	}//metodo setNvars
 	
 	public function getNvars(){
-		return $this->nvars;
+		return $this->nvars; //retorna o numero de variaveis da sessao
 	}//metodo getNvars
 	
-	public function setVar($var, $valor){
-		$_SESSION[$var] = $valor;
+	public function setVar($var, $valor){ //setar o valor 
+		$_SESSION[$var] = $valor; //exemplo $nome = junior
 		$this->setNvars();
 	}//metodo setVar
 	
@@ -47,19 +47,16 @@ class sessao{
 	public function destroy($inicia = false){
 		session_unset();
 		session_destroy();
-		$this->setNvars();
+		$this->setNvars(); //atualiza o numero de variaves
 		if($inicia == TRUE):
 			$this->start();
 		endif;		
 	}//metodo destroy
 	
-	public function printAll(){
+	public function printAll(){ //ela vai printar todas varias da nossa sessao
 		foreach($_SESSION as $k => $v):
 			printf("%s = %s<br />", $k, $v);
 		endforeach;	
-		
 	}//metodo printAll
-	
-}//sessao
-
+}//class sessao
 ?>

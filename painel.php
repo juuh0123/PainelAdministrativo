@@ -1,11 +1,6 @@
-<?php 
-	require_once('funcoes.php');
-	verificaLogin();
-	echo 'Eu sou o painel.php';
-	
-?>
-<p><a href="?logoff=true">Sair</a></p>
-<p><?php $sessao = new sessao();
-		 $sessao->printAll();
-	?>
-</p>
+<?php include('header.php'); ?>
+<div id="content">
+	<p>Conteúdo do painel</p>
+</div><!--content-->
+<?php include('sidebar.php'); ?>
+<?php include('footer.php'); ?>

@@ -8,7 +8,7 @@ loadJS('jquery-validate-messages');
 	switch($tela):
 		case 'login':
 			$sessao = new sessao();
-			if($sessao->getNvars() > 0 || $sessao->getVar('logado')!= TRUE || $sessao->getVar('ip') != $_SERVER['REMOTE_ADDR']) redireciona('painel.php');
+			if($sessao->getNvars()>0 || $sessao->getVar('logado') == TRUE) redireciona('painel.php');
 			if(isset($_POST['logar']))://logar é do form
 				$user = new usuarios();
 				$user->setValor('login', $_POST['usuario']);//campo do form

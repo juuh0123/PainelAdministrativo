@@ -14,7 +14,7 @@ define("DBUSER", "root");
 define("DBPASS", "");
 define("DBNAME", "paineladm");
 
-$constantes = array('BASEPATH','BASEURL','ADMURL','CLASSESPATH','MODULOSPATH','CSSPATH','JSPATH','DBHOST','DBUSER','DBPASS','DBNAME');
+
 ?>
 
 

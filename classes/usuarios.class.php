@@ -22,8 +22,7 @@ protegeArquivo(basename(__FILE__));//tenho que chamar em todas minhas classes
 		}//construct
 	
 		public function doLogin($objeto){
-			$objeto->extrasSelect = "WHERE login='".$objeto->getValor('login')."' AND senha='".codificaSenha($objeto->getValor('senha'))."' AND
-			ativo='s'";
+			$objeto->extrasSelect = "WHERE login='".$objeto->getValor('login')."' AND senha='".codificaSenha($objeto->getValor('senha'))."' AND ativo='s'";
 			$this->select($objeto);
 			$sessao = new sessao();
 			if($this->linhasafetadas==1):
@@ -31,7 +30,7 @@ protegeArquivo(basename(__FILE__));//tenho que chamar em todas minhas classes
 				$sessao->setVar('iduser', $usLogado->id);
 				$sessao->setVar('nomeuser', $usLogado->nome);
 				$sessao->setVar('loginuser', $usLogado->login);
-				$sessao->setVar('logado', true);
+				$sessao->setVar('logado', TRUE);
 				$sessao->setVar('ip', $_SERVER['REMOTE_ADDR']);	
 				return TRUE;
 			else:	
