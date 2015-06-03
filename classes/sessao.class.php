@@ -13,7 +13,9 @@ class sessao{
 	}//construtor
 	
 	public function start(){
-		session_start();
+		if(empty($_SESSION)): //essa linha seguindo a aula do ricardo, estava com erro pois abria duas sessoes, isso valida se já tem uma variavel inicializada no array global $_SESSION
+			session_start();
+		endif;
 		$this->id = session_id();
 		$this->setNvars();
 	}//metodo start
