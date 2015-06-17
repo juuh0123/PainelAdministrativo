@@ -2,6 +2,7 @@
 		$("input").addClass('radius5');
 		$("textarea").addClass('radius5');
 		$("fieldset").addClass('radius5');
+		$("#sidebar li").addClass('radius5');
 		
 		//accordion
 		$('#accordion a.item').click(function(){
