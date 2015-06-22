@@ -44,5 +44,43 @@ protegeArquivo(basename(__FILE__));//tenho que chamar em todas minhas classes
 			$sessao->destroy(TRUE);
 			redireciona('?erro=1');
 		}
+		
+		public function existeRegistro($campo=NULL, $valor=NULL){
+			if($campo != NULL && $valor != NULL):
+				is_numeric($valor) ? $valor = $valor : $valor = "'".$valor."'";
+				$this->extrasSelect = "WHERE $campo=$valor";
+				$this->select($this);
+				if($this->linhasafetadas > 0):
+					return TRUE;
+				else:
+					return FALSE;
+				endif;		
+			else:
+				$this->trataErro(__FILE__, __FUNCTION__, 'Faltam parâmentros para executar a função', TRUE);
+			endif;		
+		}//existeRegistro
+		
 	}//fim da classe Clientes
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

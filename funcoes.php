@@ -66,6 +66,41 @@
 			redireciona('?erro=3');
 		endif;	
 	}//vai verificar session, se pode ou não acessar certas páginas
+	function printMSG($msg=null,$tipo=null){
+		if($msg != null):
+			switch ($tipo):
+				case 'erro':
+					echo '<div class="erro">'.$msg.'</div>';
+					break;
+				case 'alerta':
+					echo '<div class="pergunta">'.$msg.'</div>';
+					break;
+				case 'sucesso':
+					echo '<div class="sucesso">'.$msg.'</div>';
+					break;
+				default:
+					echo '<div class="sucesso">'.$msg.'</div>';
+					break;
+			endswitch;
+		endif;	
+	}//printMSG
+	function isAdmin(){//verifica se a pessoa logada é adm
+		verificaLogin();//só por via das duvidas vai validar se está logado
+		$sessao = new sessao();
+		$user = new usuarios(array(
+			'administrador'=>NULL,
+		));
+		$iduser = $sessao->getVar('iduser');//pegamos a sessao do usuario logado
+		$user->extrasSelect = "WHERE id=$iduser";
+		$user->selectCampos($user);
+		$res = $user->retornaDados();
+		if(strtolower($res->administrador)=='s'):
+			return TRUE;
+		else: 
+			return FALSE;	
+		endif;	
+	}//isAdmin
+	
 ?>
 
 
