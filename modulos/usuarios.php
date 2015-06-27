@@ -129,8 +129,52 @@ loadJS('jquery-validate-messages');
 				</form>
 			<?php	
 			break;
-		case 'listar':
+		case 'listar': //tela de lista os usuarios
 			echo '<h2>Usuários cadastrados</h2>';
+			loadCSS('data-table', null, TRUE);
+			loadJS('jquery-datatable');
+			?>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$('#listausers').dataTable({
+						"oLanguage":{
+							"sZeroRecords" : "Nenhum dado encontrado para exibição",
+							"sInfo": "Monstrado _START_ a _END_ de _TOTAL_ de registros",
+							"sInfoEmpty" : "Nenhum registro para ser exibido",
+							"sInfoFiltered": "(filtrado de _MAX_ registros no total)",
+							"sSearch": "Pesquisar",
+						},
+						"sScrollY": "400px",
+						"bPaginate": false,
+						"aaSorting": [[0, "asc"]]
+					});
+				});
+			</script>
+			<table cellspacing="0" cellpadding="0" border="0" class="display" id="listausers">
+				<thead>
+					<tr>
+						<th>Nome</th><th>Email</th><th>Login</th><th>Ativo/Adm</th><th>Cadastro</th><th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php 
+						$user = new usuarios();
+						$user->select($user);
+						while($res = $user->retornaDados()):
+							echo '<tr>';
+							//printf('<td class="center">%s</td>',$res->id);
+							printf('<td>%s</td>',$res->nome);	
+							printf('<td>%s</td>',$res->email);
+							printf('<td>%s</td>',$res->login);	
+							printf('<td class="center">%s/%s</td>',strtoupper($res->ativo), strtoupper($res->administrador));	
+							printf('<td class="center">%s</td>',date("d/m/Y", strtotime($res->dataCad)));
+							printf('<td class="center"><a href="?m=usuarios&t=incluir" title="Novo cadastrado"><img src="asset/image/add.png" alt="Novo cadastrado" /></a><a href="?m=usuarios&t=editar&id=%s" title="Editar"><img src="asset/image/edit.png" alt="Editar" /></a><a href="?m=usuarios&t=senha&id=%s" title="Mudar senha"><img src="asset/image/pass.png" alt="Mudar senha" /></a><a href="?m=usuarios&t=excluir&id=%s" title="Excluir"><img src="asset/image/delete.png" alt="Excluir" /></a></td>', $res->id, $res->id, $res->id);		
+							echo '</tr>';		
+						endwhile;
+					?>
+				</tbody>
+			</table>
+			<?php
 			break;
 		default:
 			echo '<p>A tela solicita não existe.</p>';
